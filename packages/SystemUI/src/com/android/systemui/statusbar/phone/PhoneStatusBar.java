@@ -717,6 +717,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.CARRIER_SIGNAL_TOGGLE),
                     false, this);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.ACCELEROMETER_ROTATION),
+                    false, this, UserHandle.USER_ALL);
             updateAll();
         }
 
@@ -818,6 +824,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents);
             boolean mCarrierSignalToggle = Settings.System.getIntForUser(resolver,
                     Settings.System.CARRIER_SIGNAL_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
+            mStatusBarWindowManager.updateKeyguardScreenRotation();
         }
 
         void unobserve() {
@@ -827,7 +834,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     };
 
     private SettingsObserver mObserver = new SettingsObserver(mHandler);
-
     private int mInteractingWindows;
     private boolean mAutohideSuspended;
     private int mStatusBarMode;
@@ -1095,6 +1101,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         addNavigationBar();
 
         mObserver.observe();
+
+        SettingsObserver observer = new SettingsObserver(mHandler);
+        observer.observe();
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
