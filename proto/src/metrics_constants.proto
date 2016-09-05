@@ -2266,6 +2266,11 @@ message MetricsEvent {
     // ACTION: QS NFC tile tapped
     // CATEGORY: QUICK_SETTINGS
     QS_NFC = 748;
+
+    // Immersive mode
+    QS_IMMERSIVE = 501;
+    QS_IMMERSIVE_DETAILS = 502;
+    QS_IMMERSIVE_TOGGLE = 503;
   }
 
 }
