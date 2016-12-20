@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <resources>
+
     <!-- carrier label color -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
 
@@ -28,5 +29,8 @@
     <color name="batterymeter_frame_color_darkintensity">@color/dark_mode_icon_color_dual_tone_background</color>
     <color name="qs_batterymeter_frame_color">@color/batterymeter_frame_color</color>
     <color name="status_bar_battery_level_text_color">@android:color/white</color>
+
+    <!-- Pixel theme -->
+    <color name="pixel_primary_color">#242424</color>
 
 </resources>

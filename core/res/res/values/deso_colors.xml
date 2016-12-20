@@ -14,13 +14,19 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources>
 
-    <!-- Advanced Location tile mode -->
-    <string-array name="location_mode_entries" translatable="false">
-        <item>@string/quick_settings_location_battery_saving_label</item>
-        <item>@string/quick_settings_location_gps_only_label</item>
-        <item>@string/quick_settings_location_high_accuracy_label</item>
-    </string-array>
+    <!-- Color engine -->
+    <color name="dark_primary_color">@color/black</color>
+    <color name="grey_primary_color">#ff303030</color>
+    <color name="blue_accent_color">#4285F4</color>
+    <color name="red_accent_color">#f90028</color>
+    <color name="orange_accent_color">#ff3d00</color>
+    <color name="green_accent_color">#76c124</color>
+    <color name="yellow_accent_color">#ffc90f</color>
+    <color name="purple_accent_color">#6f24d6</color>
+    <color name="pink_accent_color">#ff1b70</color>
+    <color name="cyan_accent_color">#24b7d6</color>
+    <color name="grey_accent_color">#ff5d5d5d</color>
 
 </resources>
