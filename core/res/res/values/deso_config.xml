@@ -39,6 +39,10 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">64</integer>
 
+    <!-- call removeCient in cancelAuthentification after stop to
+        avoid 3s delay for certain fpc HALs -->
+    <bool name="config_fingerprintRemoveClientOnCancel">false</bool>
+
     <!-- Whether device has dash charging support -->
     <bool name="config_hasDashCharger">false</bool>
 
