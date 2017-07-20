@@ -905,7 +905,7 @@ public class NotificationPanelView extends PanelView implements
                 showQsOverride = true;
         }
 
-        return !isQsSecureExpandDisabled() && twoFingerDrag || stylusButtonClickDrag || mouseButtonClickDrag || showQsOverride;
+        return !isQsSecureExpandDisabled() && (twoFingerDrag || stylusButtonClickDrag || mouseButtonClickDrag || showQsOverride);
     }
 
     private void handleQsDown(MotionEvent event) {
