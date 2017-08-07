@@ -480,6 +480,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private boolean mBrightnessControl;
     private boolean mBrightnessChanged;
     private boolean mFingerprintQuickPulldown;
+    private boolean mCarrierSignalToggle;
     private float mScreenWidth;
     private int mMinBrightness;
     private boolean mJustPeeked;
@@ -684,34 +685,37 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN_FP),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_SCALE_PREFERENCE_KEY), 
+                    Settings.System.BLUR_SCALE_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_RADIUS_PREFERENCE_KEY), 
+                    Settings.System.BLUR_RADIUS_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_QUICK_SETTINGS_PREFERENCE_KEY), 
+                    Settings.System.TRANSLUCENT_QUICK_SETTINGS_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY), 
+                    Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY), 
+                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_QUICK_SETTINGS_PRECENTAGE_PREFERENCE_KEY), 
+                    Settings.System.TRANSLUCENT_QUICK_SETTINGS_PRECENTAGE_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY), 
+                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY), 
+                    Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.RECENT_APPS_SCALE_PREFERENCE_KEY), 
+                    Settings.System.RECENT_APPS_SCALE_PREFERENCE_KEY),
                     false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY), 
+                    Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY),
+                    false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CARRIER_SIGNAL_TOGGLE),
                     false, this);
             updateAll();
         }
@@ -745,6 +749,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
                 mHeader.updateVisibilities();
                 mHeader.queryAndUpdateWeather();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.CARRIER_SIGNAL_TOGGLE))) {
+                    mCarrierSignalToggle = Settings.System.getIntForUser(
+                            mContext.getContentResolver(),
+                            Settings.System.CARRIER_SIGNAL_TOGGLE,
+                            1, UserHandle.USER_CURRENT) == 1;
             }
             updateAll();
         }
@@ -806,6 +816,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mRadiusRecents = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY, 3);
             RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents);
+            boolean mCarrierSignalToggle = Settings.System.getIntForUser(resolver,
+                    Settings.System.CARRIER_SIGNAL_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
         }
 
         void unobserve() {

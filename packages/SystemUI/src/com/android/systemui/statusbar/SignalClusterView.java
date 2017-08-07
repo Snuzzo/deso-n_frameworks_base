@@ -25,6 +25,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -823,11 +824,17 @@ public class SignalClusterView
             if (DEBUG) Log.d(TAG, String.format("mobile: %s sig=%d typ=%d",
                         (mMobileVisible ? "VISIBLE" : "GONE"), mMobileStrengthId, mMobileTypeId));
 
-            mMobileType.setVisibility(mMobileTypeId != 0 ? View.VISIBLE : View.GONE);
+
             mDataActivity.setVisibility(mDataActivityId != 0 ? View.VISIBLE : View.GONE);
             mMobileActivity.setVisibility(mMobileActivityId != 0 ? View.VISIBLE : View.GONE);
-            mDataNetworkType.setVisibility(mDataNetworkTypeId != 0 ? View.VISIBLE
-                    : View.GONE);
+            if (Settings.System.getInt(mContext.getContentResolver(), Settings.System.CARRIER_SIGNAL_TOGGLE, 1) == 1) {
+                    mMobileType.setVisibility(mMobileTypeId != 0 ? View.VISIBLE : View.GONE);
+                    mDataNetworkType.setVisibility(mDataNetworkTypeId != 0 ? View.VISIBLE
+                            : View.GONE);
+            } else {
+                    mMobileType.setVisibility(View.GONE);
+                    mDataNetworkType.setVisibility(View.GONE);
+            }
             mMobileEmbms.setVisibility(mMobileEmbmsId != 0 ? View.VISIBLE : View.GONE);
             mMobileRoaming.setVisibility(mRoaming ? View.VISIBLE : View.GONE);
 
