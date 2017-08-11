@@ -64,4 +64,7 @@
     <!-- Config IME switcher -->
     <bool name="config_show_IMESwitcher">true</bool>
 
+    <!-- Enable lockscreen rotation by default -->
+    <bool name="config_enableLockScreenRotation">true</bool>
+
 </resources>

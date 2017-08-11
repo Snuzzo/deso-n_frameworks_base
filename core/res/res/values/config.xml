@@ -1015,9 +1015,6 @@
     <!-- Don't show lock screen before unlock screen (PIN/pattern/password) -->
     <bool name="config_enableLockBeforeUnlockScreen">false</bool>
 
-    <!-- Disable lockscreen rotation by default -->
-    <bool name="config_enableLockScreenRotation">false</bool>
-
     <!-- Enable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
